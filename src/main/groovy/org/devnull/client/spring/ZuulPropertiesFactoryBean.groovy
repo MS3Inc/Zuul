@@ -3,7 +3,8 @@ package org.devnull.client.spring
 import org.apache.http.client.HttpClient
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.BasicResponseHandler
-import org.apache.http.impl.client.DefaultHttpClient
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.impl.client.HttpClients
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 import org.devnull.client.spring.cache.PropertiesObjectStore
 import org.devnull.client.spring.crypto.PropertiesDecryptor
@@ -119,14 +120,14 @@ class ZuulPropertiesFactoryBean extends PropertySourcesPlaceholderConfigurer imp
 
     void afterPropertiesSet() {
         if (!httpClient) {
-            httpClient = new DefaultHttpClient();
+            httpClient = HttpClients.custom().build();
         }
-        // TDOO only execute if auto-config is enabled
+        // TODO only execute if auto-config is enabled
         super.setProperties(getObject())
     }
 
     void destroy() {
-        httpClient.connectionManager.shutdown()
+        httpClient.close()
     }
 
     Properties getObject() {

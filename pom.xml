@@ -56,11 +56,13 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <scope>compile</scope>
+            <version>4.4.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient-cache</artifactId>
             <scope>compile</scope>
+            <version>4.4.1</version>
         </dependency>
         <dependency>
             <groupId>org.jasypt</groupId>
